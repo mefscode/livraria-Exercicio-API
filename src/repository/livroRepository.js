@@ -1,5 +1,20 @@
 import { con } from "./connection.js";
 
+export async function ProcurarLivroPorNome(nome){
+  let command = `
+      select id,
+           titulo,
+           autor,
+           genero,
+           preco,
+           estoque
+     from livro
+    where titulo = ?
+  `
+
+  let [resposta] = await con.query (command,[nome])
+  return resposta[0]  
+}
 
 export async function saveLivro(livro) {
   const command = `

@@ -11,6 +11,13 @@ export async function ListarLivros() {
 }
 
 export async function CriarLivro(livro) {
+    let clienteAtual = await dbLivro.ProcurarLivroPorNome(livro.titulo)
+    if(clienteAtual != null){
+        throw new Error("Livro já existente");
+    }
+    if(livro.preco < 0 )
+        throw new Error("Valor não pode ser negativo");
+        
     let id = await dbLivro.saveLivro(livro);
     return id
 }
