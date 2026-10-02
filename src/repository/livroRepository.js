@@ -83,3 +83,4 @@ export async function deleteLivro(id) {
   const [result] = await con.query(command, [id])
   return result.affectedRows;
 }
+
